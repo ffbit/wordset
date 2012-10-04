@@ -11,8 +11,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
 
 @Entity
+@Table(name = "feedbacks")
 @Access(AccessType.PROPERTY)
 public class Feedback implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -21,8 +24,18 @@ public class Feedback implements Serializable {
     private String comment;
     private HumanLanguage language;
 
+    private Feedback() {
+        super();
+    }
+
+    public Feedback(String comment, HumanLanguage language) {
+        this();
+        this.comment = comment;
+        this.language = language;
+    }
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
         return id;
     }
