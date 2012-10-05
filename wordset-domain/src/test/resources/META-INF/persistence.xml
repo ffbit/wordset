@@ -6,6 +6,7 @@
     <persistence-unit name="test" transaction-type="RESOURCE_LOCAL">
         <!-- Entity classes -->
         <class>com.ffbit.wordset.domain.Feedback</class>
+        <class>com.ffbit.wordset.domain.Tag</class>
 
         <properties>
             <property name="javax.persistence.jdbc.dialect"

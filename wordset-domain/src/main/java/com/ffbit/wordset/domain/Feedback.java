@@ -1,9 +1,12 @@
 package com.ffbit.wordset.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,8 +14,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 
 @Entity
 @Table(name = "feedbacks")
@@ -23,6 +26,7 @@ public class Feedback implements Serializable {
     private Long id;
     private String comment;
     private HumanLanguage language;
+    private Set<Tag> tags;
 
     private Feedback() {
         super();
@@ -32,6 +36,7 @@ public class Feedback implements Serializable {
         this();
         this.comment = comment;
         this.language = language;
+        this.tags = new HashSet<Tag>();
     }
 
     @Id
@@ -61,6 +66,20 @@ public class Feedback implements Serializable {
 
     public void setLanguage(HumanLanguage language) {
         this.language = language;
+    }
+
+    @OneToMany(mappedBy = "feedback", cascade = CascadeType.ALL, orphanRemoval = true)
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public void addTag(Tag tag) {
+        tags.add(tag);
+        tag.setFeedback(this);
     }
 
 }
