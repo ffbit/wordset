@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.google.common.base.Objects;
+
 @Entity
 @Table(name = "tags")
 @Access(AccessType.PROPERTY)
@@ -72,12 +74,7 @@ public class Tag implements Serializable {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result
-                + ((partOfSpeech == null) ? 0 : partOfSpeech.hashCode());
-        result = prime * result + ((word == null) ? 0 : word.hashCode());
-        return result;
+        return Objects.hashCode(word, partOfSpeech);
     }
 
     @Override
@@ -89,17 +86,18 @@ public class Tag implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         Tag other = (Tag) obj;
-        if (partOfSpeech == null) {
-            if (other.partOfSpeech != null)
-                return false;
-        } else if (!partOfSpeech.equals(other.partOfSpeech))
-            return false;
-        if (word == null) {
-            if (other.word != null)
-                return false;
-        } else if (!word.equals(other.word))
-            return false;
-        return true;
+
+        return Objects.equal(word, other.word)
+                && Objects.equal(partOfSpeech, other.partOfSpeech);
+    }
+
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this)
+                .add("id", id)
+                .add("word", word)
+                .add("partOfSpeech", partOfSpeech)
+                .toString();
     }
 
 }
