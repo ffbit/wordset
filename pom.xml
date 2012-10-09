@@ -20,6 +20,7 @@
         <org.hibernate.version>4.1.7.Final</org.hibernate.version>
         <org.hibernate.hibernate-search.version>4.1.1.Final</org.hibernate.hibernate-search.version>
         <org.hsqldb.version>2.2.8</org.hsqldb.version>
+        <org.mockito.version>1.9.0</org.mockito.version>
         <org.slf4j.version>1.7.1</org.slf4j.version>
         <org.springframework.version>3.1.1.RELEASE</org.springframework.version>
         <org.springframework.data-jpa.version>1.1.0.RELEASE</org.springframework.data-jpa.version>
@@ -27,6 +28,7 @@
 
     <modules>
         <module>wordset-domain</module>
+        <module>wordset-parser</module>
     </modules>
 
     <dependencyManagement>
@@ -102,6 +104,13 @@
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>${org.mockito.version}</version>
                 <scope>test</scope>
             </dependency>
 
